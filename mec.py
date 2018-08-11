@@ -53,9 +53,6 @@ class ProxyAccess(app_manager.RyuApp):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         self.dps.append(datapath)
-		self.logger.info(datapath.id)
-		if datapath.id == 1:
-			self.web_server_dp = datapath
         # add goto table 1 flow entry on table 0
         match = parser.OFPMatch()
         inst = [parser.OFPInstructionGotoTable(table_id=1)]
@@ -170,8 +167,9 @@ class ProxyAccess(app_manager.RyuApp):
                 if arp.src_ip == ip_addr:
                     print "detect_arp reply:i am %s,my mac is %s" % (ip_addr, eth.src)
                     self.ip_to_mac[ip_addr] = eth.src
-                    if arp.src_ip == web_server:
-                        #self.web_server_dp = datapath
+                    if arp.src_ip == web_proxy:
+					
+                        self.web_server_dp = datapath
                         print "i am web_server,ip is %s, derectly connect switch(dpid:%s)" % (web_server, datapath.id)
 
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
