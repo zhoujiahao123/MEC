@@ -53,6 +53,7 @@ class ProxyAccess(app_manager.RyuApp):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         self.dps.append(datapath)
+		self.logger.info(datapath.id)
 		if datapath.id == 1:
 			self.web_server_dp = datapath
         # add goto table 1 flow entry on table 0
@@ -203,7 +204,7 @@ class ProxyAccess(app_manager.RyuApp):
         dpid = datapath.id
         self.mac_to_port.setdefault(dpid, {})
 
-        self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
+        #self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 
         # learn a mac address to avoid FLOOD next time.
         self.mac_to_port[dpid][src] = in_port
