@@ -30,9 +30,9 @@ from ryu.lib import hub
 
 detect_ip = '10.0.0.99'
 detect_mac = '00:00:00:00:00:99'
-host_proxy = '10.0.0.1'
-web_server = '10.0.0.3'
-web_proxy = '10.0.0.4'
+host_proxy = '10.0.0.11'
+web_server = '10.0.0.15'
+web_proxy = '10.0.0.9'
 
 
 class ProxyAccess(app_manager.RyuApp):
